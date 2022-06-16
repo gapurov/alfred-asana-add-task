@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.alfredapp.alfred-asana-add-task</string>
+	<key>connections</key>
+	<dict>
+		<key>1DE25DD7-7F1D-480F-8DA3-17A9E983389C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>249B6FEB-3B29-4E5E-A012-4D0878C7E65C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>249B6FEB-3B29-4E5E-A012-4D0878C7E65C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E61688B6-B4A2-4714-A534-67CBECE7D594</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vladislav Gapurov</string>
+	<key>description</key>
+	<string>Add task to asana workspace</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Asana Add Task</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Asana Task Added</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E61688B6-B4A2-4714-A534-67CBECE7D594</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>eval $(/usr/libexec/path_helper -s)
+eval "$($SHELL -i -l -c 'echo -e "\n"PATH=\"$PATH:\$PATH\""\n"' 2&gt;/dev/null | grep "^PATH=")"
+export PATH
+
+if command -v deno &gt;/dev/null 2&gt;&amp;1; then
+	deno run --allow-net=app.asana.com index.ts "$API_KEY $WORKSPACE $ASSIGNEE $1"
+else
+	echo $'{
+    "items":[
+      {
+        "title": "Couldn\'t find the `deno` binary",
+        "subtitle": "Symlink it to `/usr/local/bin`"
+      }
+    ]
+  }'
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>249B6FEB-3B29-4E5E-A012-4D0878C7E65C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>add</string>
+				<key>subtext</key>
+				<string>Syntax: new task::notes</string>
+				<key>text</key>
+				<string>Add task to asana</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1DE25DD7-7F1D-480F-8DA3-17A9E983389C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>1DE25DD7-7F1D-480F-8DA3-17A9E983389C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>70</integer>
+			<key>ypos</key>
+			<integer>55</integer>
+		</dict>
+		<key>249B6FEB-3B29-4E5E-A012-4D0878C7E65C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>245</integer>
+			<key>ypos</key>
+			<integer>55</integer>
+		</dict>
+		<key>E61688B6-B4A2-4714-A534-67CBECE7D594</key>
+		<dict>
+			<key>xpos</key>
+			<integer>400</integer>
+			<key>ypos</key>
+			<integer>55</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>API_KEY</key>
+		<string></string>
+		<key>ASSIGNEE</key>
+		<string></string>
+		<key>WORKSPACE</key>
+		<string></string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>API_KEY</string>
+		<string>ASSIGNEE</string>
+		<string>WORKSPACE</string>
+	</array>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
